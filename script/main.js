@@ -9,14 +9,6 @@
 		pzlPieces = document.querySelectorAll('.puzzle-pieces img'),
 		dropZones = document.querySelectorAll('.drop-zone');
 
-	/*
-	theThumbnails = [
-			<img src="images/buttonZero.jpg" data-bgref="0" alt="thumbnail">
-			<img src="images/buttonOne.jpg" data-bgref="1" alt="thumbnail">
-	    	<img src="images/buttonTwo.jpg" data-bgref="2" alt="thumbnail">
-			<img src="images/buttonThree.jpg" data-bgref="3" alt="thumbnail">
-	]
-	*/
 
 	const imageNames = ['topLeft', 'topRight', 'bottomLeft', 'bottomRight'];
 	
@@ -51,6 +43,12 @@
 
 	function allowDrop(event) {
 		event.preventDefault();
+		
+		//this function will not allow to drop more images if the value is more than 0
+		if (this.children.length > 0) { 
+			return;
+		 }
+		 
 		let droppedElId = event.dataTransfer.getData('draggedEl');
 
 		// retrieve the dragged el by its ID, and then put it inside the current drop zone
