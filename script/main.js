@@ -1,9 +1,5 @@
-// we always start with a module to encapsulate our own code
-// is is called an IIFE (Immediately-Invoked Function Expression)
-
 (() => {
-	// collect ALL of the elements that we want the user to interact with and also elements that to change
-	// JS holds these in memory so that it can access them later (these are elements in the HTML)
+
 	let theThumbnails = document.querySelectorAll('#buttonHolder img'),
 		gameBoard = document.querySelector('.puzzle-board'),
 		pzlPieces = document.querySelectorAll('.puzzle-pieces img'),
@@ -15,56 +11,36 @@
 	
 	function changeImageSet() {
 		gameBoard.style.backgroundImage = `url(images/backGround${this.dataset.bgref}.jpg)`;
-
-		let clickedThumb = this; // this is the element (thumbnail) we clicked on
-
 		console.log('change thumbnails');
 
-		// debugger; 
-		// this will pause code execution on this line. like pushing pause on Netflix / Amazon Prime
-
-		// update the draggable piece's src attribute one at a time
-		pzlPieces.forEach((piece, index) => {
-			piece.src = `images/${imageNames[index] + clickedThumb.dataset.bgref}.jpg`;
+		// buh 2 = Reset the puzzle when the thumbnail were clikcked
+		imageNames.forEach((piece, index) => {
+			pzlPieces[index].src = `images/${piece + this.dataset.bgref}.jpg`;
+			resetPieces.appendChild(pzlPieces[index]); 
 		});
 	}
 
 	function allowDrag(event) {
 		console.log('started draggin me');
-		//make a code not more than 1 should be droped - child elemeant.
-
-
-		// create a reference to the element we're dragging so we can retrieve it later
 		event.dataTransfer.setData('draggedEl', this.id);
 	}
 
 	function allowDragOver(event) {
-		// override default behaviour on certain elements when an event happens
 		event.preventDefault();
 		console.log('started draggin over me');
 	}
 
 	function allowDrop(event) {
-		event.preventDefault();
-		
+		event.preventDefault();		
 		// bug 1 = this function will not allow to drop more images if the value is more than 0
-		if (this.children.length > 0) { return;}
-
+		if (this.children.length >= 1) { return;}
 		let droppedElId = event.dataTransfer.getData('draggedEl');
-
-		// retrieve the dragged el by its ID, and then put it inside the current drop zone
 		this.appendChild(document.querySelector(`#${droppedElId}`));
-
-		// MDN JavaScript template string
 	}
 
-	// how to we want the user to interact with the elements that we collected earlier?
-	// events are things like clikcs, drags, double-clicks, keypresses... all the ways that a user can interact with a mouse, a keyboard etc
- 
 	theThumbnails.forEach(image => image.addEventListener('click', changeImageSet));
 	pzlPieces.forEach(piece => piece.addEventListener('dragstart', allowDrag));
 
-	// set up the drop zone event handling
 	dropZones.forEach(zone => {
 		zone.addEventListener('dragover', allowDragOver);
 		zone.addEventListener('drop', allowDrop);
