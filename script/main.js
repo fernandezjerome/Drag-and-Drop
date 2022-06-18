@@ -13,7 +13,7 @@
 		gameBoard.style.backgroundImage = `url(images/backGround${this.dataset.bgref}.jpg)`;
 		console.log('change thumbnails');
 
-		// buh 2 = Reset the puzzle when the thumbnail were clikcked
+		// bug 2 = Reset the puzzle when the thumbnail were clikcked
 		imageNames.forEach((piece, index) => {
 			pzlPieces[index].src = `images/${piece + this.dataset.bgref}.jpg`;
 			resetPieces.appendChild(pzlPieces[index]); 
