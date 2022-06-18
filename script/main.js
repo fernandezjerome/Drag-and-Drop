@@ -8,6 +8,7 @@
 		gameBoard = document.querySelector('.puzzle-board'),
 		pzlPieces = document.querySelectorAll('.puzzle-pieces img'),
 		dropZones = document.querySelectorAll('.drop-zone');
+		resetPieces = document.querySelector(".puzzle-pieces");
 
 
 	const imageNames = ['topLeft', 'topRight', 'bottomLeft', 'bottomRight'];
