@@ -17,6 +17,8 @@
 
 		let clickedThumb = this; // this is the element (thumbnail) we clicked on
 
+		console.log('change thumbnails');
+
 		// debugger; 
 		// this will pause code execution on this line. like pushing pause on Netflix / Amazon Prime
 
@@ -44,11 +46,9 @@
 	function allowDrop(event) {
 		event.preventDefault();
 		
-		//this function will not allow to drop more images if the value is more than 0
-		if (this.children.length > 0) { 
-			return;
-		 }
-		 
+		// bug 1 = this function will not allow to drop more images if the value is more than 0
+		if (this.children.length > 0) { return;}
+
 		let droppedElId = event.dataTransfer.getData('draggedEl');
 
 		// retrieve the dragged el by its ID, and then put it inside the current drop zone
